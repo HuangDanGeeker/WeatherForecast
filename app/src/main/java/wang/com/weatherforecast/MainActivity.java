@@ -22,6 +22,13 @@ public class MainActivity extends AppCompatActivity {
         weatherItems.add(new WeatherItem("1","1","1","1", R.drawable.icon_geo));
         weatherItems.add(new WeatherItem("1","1","1","1", R.drawable.icon_geo));
         weatherItems.add(new WeatherItem("1","1","1","1", R.drawable.icon_geo));
+        weatherItems.add(new WeatherItem("1","1","1","1", R.drawable.icon_geo));
+        weatherItems.add(new WeatherItem("1","1","1","1", R.drawable.icon_geo));
+        weatherItems.add(new WeatherItem("1","1","1","1", R.drawable.icon_geo));
+        weatherItems.add(new WeatherItem("1","1","1","1", R.drawable.icon_geo));
+        weatherItems.add(new WeatherItem("1","1","1","1", R.drawable.icon_geo));
+        weatherItems.add(new WeatherItem("1","1","1","1", R.drawable.icon_geo));
+        weatherItems.add(new WeatherItem("1","1","1","1", R.drawable.icon_geo));
         weatherItemAdapter = new WeatherItemAdapter(MainActivity.this, R.layout.weather_item, weatherItems);
         weatherItemView = (ListView) findViewById(R.id.weather_item_view);
         weatherItemView.setAdapter(weatherItemAdapter);

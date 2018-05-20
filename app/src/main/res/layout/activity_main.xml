@@ -90,14 +90,13 @@
             android:layout_height="wrap_content"
             />
     </GridLayout>
-    <!--<ScrollView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="600dp">-->
-
-    <!--</ScrollView>-->
-
-    <ListView
-        android:id="@+id/weather_item_view"
+    <ScrollView
+        android:fillViewport="true"
         android:layout_width="match_parent"
-        android:layout_height="318dp"></ListView>
+        android:layout_height="match_parent">
+        <ListView
+            android:id="@+id/weather_item_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></ListView>
+    </ScrollView>
 </LinearLayout>
