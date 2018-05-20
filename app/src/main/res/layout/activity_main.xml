@@ -7,19 +7,97 @@
     android:orientation="vertical"
     tools:context="wang.com.weatherforecast.MainActivity">
 
-    <ImageView
-        android:layout_height="wrap_content"
+
+
+    <GridLayout
+        android:rowCount="4"
+        android:columnCount="2"
         android:layout_width="match_parent"
-        ></ImageView>
+        android:layout_height="200dp">
+        <TextView
+            android:text="WeatherForecast"
+            android:layout_gravity="fill"
+            android:layout_columnSpan="1"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnSpan="1"
+            android:layout_gravity="fill"
+            android:layout_marginLeft="80dp"
+            android:text="点击" />
+
+
+        <TextView
+            android:layout_gravity="fill"
+            android:layout_columnSpan="1"
+            android:text="日期"
+            android:textSize="18dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+        <ImageView
+            android:layout_gravity="fill"
+            android:layout_rowSpan="2"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/icon_geo"
+            />
+
+
+        <TextView
+            android:layout_gravity="fill"
+            android:layout_columnSpan="1"
+            android:text="最高温度"
+            android:textSize="25dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+
+        <TextView
+            android:layout_gravity="fill"
+            android:layout_columnSpan="1"
+            android:text="最低温度"
+            android:textSize="15dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+        <TextView
+            android:layout_gravity="fill"
+            android:layout_columnSpan="1"
+            android:text="天气类型"
+            android:textSize="17dp"
+            android:layout_marginLeft="20dp"
+            android:gravity="center"
+            android:layout_marginBottom="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+    </GridLayout>
     <!--<ScrollView-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="600dp">-->
 
-        <ListView
-            android:id="@+id/weather_item_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"></ListView>
     <!--</ScrollView>-->
 
-
+    <ListView
+        android:id="@+id/weather_item_view"
+        android:layout_width="match_parent"
+        android:layout_height="318dp"></ListView>
 </LinearLayout>
