@@ -3,32 +3,27 @@ package wang.com.weatherforecast;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity {
-
-    private Button toMapBtn;
+    private ArrayAdapter<String> weatherItemAdapter;
+    ListView weatherItemView;
     private Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //toMapBtn 获取与添加点击相应
-        toMapBtn = (Button) findViewById(R.id.toMapBtn);
-        toMapBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("MainActivity", "R.id.toMapBtn onclick");
-                intent = new Intent(getBaseContext(), MapActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
-
-
+        List<WeatherItem> weatherItems = new ArrayList<>();
+        weatherItems.add(new WeatherItem("1","1","1","1", R.drawable.icon_geo));
+        weatherItems.add(new WeatherItem("1","1","1","1", R.drawable.icon_geo));
+        weatherItems.add(new WeatherItem("1","1","1","1", R.drawable.icon_geo));
+        weatherItems.add(new WeatherItem("1","1","1","1", R.drawable.icon_geo));
+        weatherItemAdapter = new WeatherItemAdapter(MainActivity.this, R.layout.weather_item, weatherItems);
+        weatherItemView = (ListView) findViewById(R.id.weather_item_view);
+        weatherItemView.setAdapter(weatherItemAdapter);
     }
 }

@@ -45,7 +45,6 @@
             android:enabled="true"
             android:process=":remote"></service>
 
-        <activity android:name=".MapActivity"></activity>
     </application>
 
 </manifest>
