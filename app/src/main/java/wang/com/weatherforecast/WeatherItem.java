@@ -1,10 +1,12 @@
 package wang.com.weatherforecast;
 
+import java.io.Serializable;
+
 /**
  * Created by 1 on 2018/5/20.
  */
 
-public class WeatherItem {
+public class WeatherItem  implements Serializable {
 
     String data;
     String weatherType;
