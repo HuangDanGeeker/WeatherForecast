@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //toMapBtn 获取与添加点击相应
         toMapBtn = (Button) findViewById(R.id.toMapBtn);
         toMapBtn.setOnClickListener(new View.OnClickListener() {
             @Override
