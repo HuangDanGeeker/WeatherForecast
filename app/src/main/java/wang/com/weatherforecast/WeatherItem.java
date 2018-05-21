@@ -14,14 +14,23 @@ public class WeatherItem  implements Serializable {
     String minTemper;
 
 
+
+    String Humidity;
+    String wind;
+    String pressure;
+
+
     String imgSymbol;
 
-    public  WeatherItem(String data, String weatherType, String maxTemper, String minTemper, String imgSymbol){
+    public  WeatherItem(String data, String weatherType, String maxTemper, String minTemper, String imgSymbol, String Humidity,  String pressure, String wind){
         this.date = data;
         this.weatherType = weatherType;
         this.maxTemper = maxTemper;
         this.minTemper = minTemper;
         this.imgSymbol = imgSymbol;
+        this.Humidity = Humidity;
+        this.wind = wind;
+        this.pressure = pressure;
     }
 
     @Override
@@ -65,6 +74,16 @@ public class WeatherItem  implements Serializable {
         return imgSymbol;
     }
 
+    public String getHumidity() {
+        return Humidity;
+    }
 
+    public String getWind() {
+        return wind;
+    }
+
+    public String getPressure() {
+        return pressure;
+    }
 
 }
