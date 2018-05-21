@@ -8,27 +8,32 @@ import java.io.Serializable;
 
 public class WeatherItem  implements Serializable {
 
-    String data;
+    String date;
     String weatherType;
     String maxTemper;
     String minTemper;
-    Integer imhSymbol;
+    Integer imgSymbol;
 
-    public  WeatherItem(String data, String weatherType, String maxTemper, String minTemper, Integer imhSymbol){
-        this.data = data;
+    public  WeatherItem(String data, String weatherType, String maxTemper, String minTemper, Integer imgSymbol){
+        this.date = data;
         this.weatherType = weatherType;
         this.maxTemper = maxTemper;
         this.minTemper = minTemper;
-        this.imhSymbol = imhSymbol;
+        this.imgSymbol = imgSymbol;
 
     }
 
-    public String getData() {
-        return data;
+    @Override
+    public String toString() {
+        return this.date + weatherType + maxTemper + minTemper + imgSymbol;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getWeatherType() {
@@ -55,12 +60,12 @@ public class WeatherItem  implements Serializable {
         this.minTemper = minTemper;
     }
 
-    public Integer getImhSymbol() {
-        return imhSymbol;
+    public Integer getImgSymbol() {
+        return imgSymbol;
     }
 
-    public void setImhSymbol(Integer imhSymbol) {
-        this.imhSymbol = imhSymbol;
+    public void setImgSymbol(Integer imgSymbol) {
+        this.imgSymbol = imgSymbol;
     }
 
 

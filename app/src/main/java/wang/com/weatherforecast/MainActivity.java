@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 WeatherItem item = (WeatherItem) MainActivity.this.weatherItemAdapter.getItem(position);
-//                Toast.makeText(getBaseContext(), item.getData(), Toast.LENGTH_LONG).show();
+//                Toast.makeText(getBaseContext(), item.getDate(), Toast.LENGTH_LONG).show();
                 intent = new Intent(getBaseContext(), DetailActivity.class);
                 intent.putExtra("WeatherItem", item);
                 startActivity(intent);
