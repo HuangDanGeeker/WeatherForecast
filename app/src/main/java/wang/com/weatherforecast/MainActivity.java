@@ -14,6 +14,15 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     Button menuBtn;
     private Intent intent;
     private static final int NOTIFY_WEATHER = 201;
-
+    private String defaultCity = "长沙";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +80,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        notifyWeather("bad weather");
+//        notifyWeather("bad weather");
+        queryWeather(defaultCity);
     }
 
     public void notifyWeather(String weatherType){
@@ -83,5 +93,33 @@ public class MainActivity extends AppCompatActivity {
                 .setSmallIcon(R.mipmap.ic_launcher_round)
                 .build();
         manager.notify(NOTIFY_WEATHER, notification);
+    }
+
+    public void queryWeather(String cityName){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                //创建HttpClient对象
+                HttpClient httpClient = new DefaultHttpClient();
+                //创建请求对象
+                HttpGet httpGet = new HttpGet("http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=870ea3f91bdb99ca599ca042eca9eb52&q=Guangzhou,1809858");
+                try{
+                    //请求
+                    HttpResponse response = httpClient.execute(httpGet);
+                    //检查响应状态
+                    if(response.getStatusLine().getStatusCode() == 200){
+                       //取出数据
+                        HttpEntity entity = response.getEntity();
+                        String responseEntityStr = EntityUtils.toString(entity, "utf-8");
+                        Gson gson = new Gson();
+                        ResponseEntity e = gson.fromJson(responseEntityStr, ResponseEntity.class);
+                        e.getCnt();
+                    }else{
+                    }
+                }catch (Exception e){
+
+                }
+            }
+        }).start();
     }
 }
