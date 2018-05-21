@@ -12,15 +12,16 @@ public class WeatherItem  implements Serializable {
     String weatherType;
     String maxTemper;
     String minTemper;
-    Integer imgSymbol;
 
-    public  WeatherItem(String data, String weatherType, String maxTemper, String minTemper, Integer imgSymbol){
+
+    String imgSymbol;
+
+    public  WeatherItem(String data, String weatherType, String maxTemper, String minTemper, String imgSymbol){
         this.date = data;
         this.weatherType = weatherType;
         this.maxTemper = maxTemper;
         this.minTemper = minTemper;
         this.imgSymbol = imgSymbol;
-
     }
 
     @Override
@@ -60,13 +61,10 @@ public class WeatherItem  implements Serializable {
         this.minTemper = minTemper;
     }
 
-    public Integer getImgSymbol() {
+    public String getImgSymbol() {
         return imgSymbol;
     }
 
-    public void setImgSymbol(Integer imgSymbol) {
-        this.imgSymbol = imgSymbol;
-    }
 
 
 }

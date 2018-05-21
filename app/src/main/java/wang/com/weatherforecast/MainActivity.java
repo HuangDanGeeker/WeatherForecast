@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.internal.LinkedTreeMap;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -25,6 +26,8 @@ import org.apache.http.util.EntityUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.baidu.location.g.j.S;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -39,17 +42,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         List<WeatherItem> weatherItems = new ArrayList<>();
-        weatherItems.add(new WeatherItem("22","1","1","1", R.drawable.icon_geo));
-        weatherItems.add(new WeatherItem("1","1","1","1", R.drawable.icon_geo));
-        weatherItems.add(new WeatherItem("1","1","1","1", R.drawable.icon_geo));
-        weatherItems.add(new WeatherItem("1","1","1","1", R.drawable.icon_geo));
-        weatherItems.add(new WeatherItem("1","1","1","1", R.drawable.icon_geo));
-        weatherItems.add(new WeatherItem("1","1","1","1", R.drawable.icon_geo));
-        weatherItems.add(new WeatherItem("1","1","1","1", R.drawable.icon_geo));
-        weatherItems.add(new WeatherItem("1","1","1","1", R.drawable.icon_geo));
-        weatherItems.add(new WeatherItem("1","1","1","1", R.drawable.icon_geo));
-        weatherItems.add(new WeatherItem("1","1","1","1", R.drawable.icon_geo));
-        weatherItems.add(new WeatherItem("1","1","1","1", R.drawable.icon_geo));
+//        weatherItems.add(new WeatherItem("22","1","1","1", R.drawable.icon_geo));
+//        weatherItems.add(new WeatherItem("1","1","1","1", R.drawable.icon_geo));
+//        weatherItems.add(new WeatherItem("1","1","1","1", R.drawable.icon_geo));
+//        weatherItems.add(new WeatherItem("1","1","1","1", R.drawable.icon_geo));
+//        weatherItems.add(new WeatherItem("1","1","1","1", R.drawable.icon_geo));
+//        weatherItems.add(new WeatherItem("1","1","1","1", R.drawable.icon_geo));
+//        weatherItems.add(new WeatherItem("1","1","1","1", R.drawable.icon_geo));
+//        weatherItems.add(new WeatherItem("1","1","1","1", R.drawable.icon_geo));
+//        weatherItems.add(new WeatherItem("1","1","1","1", R.drawable.icon_geo));
+//        weatherItems.add(new WeatherItem("1","1","1","1", R.drawable.icon_geo));
+//        weatherItems.add(new WeatherItem("1","1","1","1", R.drawable.icon_geo));
         weatherItemAdapter = new WeatherItemAdapter(MainActivity.this, R.layout.weather_item, weatherItems);
         weatherItemView = (ListView) findViewById(R.id.weather_item_view);
         weatherItemView.setAdapter(weatherItemAdapter);
@@ -112,8 +115,22 @@ public class MainActivity extends AppCompatActivity {
                         HttpEntity entity = response.getEntity();
                         String responseEntityStr = EntityUtils.toString(entity, "utf-8");
                         Gson gson = new Gson();
-                        ResponseEntity e = gson.fromJson(responseEntityStr, ResponseEntity.class);
-                        e.getCnt();
+                        ResponseEntity responseEntityJson = gson.fromJson(responseEntityStr, ResponseEntity.class);
+                        List responseList = responseEntityJson.getList();
+                        List<WeatherItem> weatherList = new ArrayList(15);
+                        WeatherItem tempItem = nul;
+                        LinkedTreeMap<String, Object> innerItem = null;
+                        for(int i = 0; i < 15; i++){
+                            innerItem = (LinkedTreeMap<String, Object>)responseList.get(i);
+                            tempItem = new WeatherItem(
+                                    (String)innerItem.get("dt_txt"),
+                                    ((LinkedTreeMap<String, String>)((ArrayList)innerItem.get("weather")).get(0)).get("main"),
+                                    ((LinkedTreeMap<String, String>)innerItem.get("main")).get("temp_max"),
+                                    ((LinkedTreeMap<String, String>)innerItem.get("main")).get("temp_min"),
+                                    (String)innerItem.get("dt_txt")
+                            );
+                            weatherList.add(tempItem);
+                        }
                     }else{
                     }
                 }catch (Exception e){
