@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
                     //请求
                     HttpResponse response = httpClient.execute(httpGet);
                     //检查响应状态
-                    if(response.getStatusLine().getStatusCode() == 200){
+                    if (response.getStatusLine().getStatusCode() == 200) {
                        //取出数据
                         HttpEntity entity = response.getEntity();
                         String responseEntityStr = EntityUtils.toString(entity, "utf-8");
@@ -128,15 +128,16 @@ public class MainActivity extends AppCompatActivity {
                         List<WeatherItem> weatherList = new ArrayList(15);
                         WeatherItem tempItem = null;
                         LinkedTreeMap<String, Object> innerItem = null;
-                        for(int i = 0; i < 15; i++){
+                        for (int i = 0; i < 15; i++) {
                             innerItem = (LinkedTreeMap<String, Object>)responseList.get(i);
                             tempItem = new WeatherItem(
                                     (String)innerItem.get("dt_txt"),
                                     ((LinkedTreeMap<String, String>)((ArrayList)innerItem.get("weather")).get(0)).get("main"),
-                                    ((LinkedTreeMap<String, Object>)innerItem.get("main")).get("temp_max").toString(),
-                                    ((LinkedTreeMap<String, Object>)innerItem.get("main")).get("temp_min").toString(),
+                                    new Double(((LinkedTreeMap<String, Double>)innerItem.get("main")).get("temp_max") - 273.15 ).toString().substring(0,4),
+                                    new Double(((LinkedTreeMap<String, Double>)innerItem.get("main")).get("temp_min") - 273.15 ).toString().substring(0,4),
                                     (String)innerItem.get("dt_txt")
                             );
+
                             weatherList.add(tempItem);
                         }
                         Message message = new Message();
