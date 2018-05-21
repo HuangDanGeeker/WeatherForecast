@@ -35,11 +35,19 @@ public class WeatherItemAdapter extends ArrayAdapter {
         TextView maxTemper = (TextView) view.findViewById(R.id.maxTemper);//获取该布局内的文本视图
         TextView minTemper= (TextView) view.findViewById(R.id.minTemper);//获取该布局内的文本视图
         TextView weatherType = (TextView) view.findViewById(R.id.weatherType);//获取该布局内的文本视图
-        imgSymbol.setImageResource(item.getImgSymbol());//为图片视图设置图片资源
+        imgSymbol.setImageResource(getImgResource(item.getImgSymbol()));//为图片视图设置图片资源
         data.setText(item.getDate());
         maxTemper.setText(item.getMaxTemper());
         minTemper.setText(item.getMinTemper());
         weatherType.setText(item.getWeatherType());
         return view;
+    }
+
+    public Integer getImgResource(String imgStr){
+        if(imgStr.equals("Clouds")){
+            return R.drawable.icon_geo;
+        }
+
+        return R.drawable.icon_geo;
     }
 }

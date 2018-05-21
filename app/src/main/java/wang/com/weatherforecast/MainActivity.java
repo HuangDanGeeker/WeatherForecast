@@ -5,8 +5,11 @@ import android.app.NotificationManager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -27,8 +30,6 @@ import org.apache.http.util.EntityUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.baidu.location.g.j.S;
-
 
 public class MainActivity extends AppCompatActivity {
     private ArrayAdapter<WeatherItem> weatherItemAdapter;
@@ -36,26 +37,21 @@ public class MainActivity extends AppCompatActivity {
     Button menuBtn;
     private Intent intent;
     private static final int NOTIFY_WEATHER = 201;
+    private static final int RESPONSE_WEATHER = 101;
     private String defaultCity = "长沙";
-    @Override
+
+    private Handler handler;
+
+
+        @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        List<WeatherItem> weatherItems = new ArrayList<>();
-//        weatherItems.add(new WeatherItem("22","1","1","1", R.drawable.icon_geo));
-//        weatherItems.add(new WeatherItem("1","1","1","1", R.drawable.icon_geo));
-//        weatherItems.add(new WeatherItem("1","1","1","1", R.drawable.icon_geo));
-//        weatherItems.add(new WeatherItem("1","1","1","1", R.drawable.icon_geo));
-//        weatherItems.add(new WeatherItem("1","1","1","1", R.drawable.icon_geo));
-//        weatherItems.add(new WeatherItem("1","1","1","1", R.drawable.icon_geo));
-//        weatherItems.add(new WeatherItem("1","1","1","1", R.drawable.icon_geo));
-//        weatherItems.add(new WeatherItem("1","1","1","1", R.drawable.icon_geo));
-//        weatherItems.add(new WeatherItem("1","1","1","1", R.drawable.icon_geo));
-//        weatherItems.add(new WeatherItem("1","1","1","1", R.drawable.icon_geo));
-//        weatherItems.add(new WeatherItem("1","1","1","1", R.drawable.icon_geo));
-        weatherItemAdapter = new WeatherItemAdapter(MainActivity.this, R.layout.weather_item, weatherItems);
+
+
         weatherItemView = (ListView) findViewById(R.id.weather_item_view);
-        weatherItemView.setAdapter(weatherItemAdapter);
+
+
         //为ListView设置ItemClick监听器
         weatherItemView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -78,13 +74,25 @@ public class MainActivity extends AppCompatActivity {
                 //TODO
                 intent.setData(Uri.parse("baidumap://map/show?center=40.057406655722,116.29644071728&zoom=11&traffic=on&bounds=37.8608310000,112.5963090000,42.1942670000,118.9491260000"));
                 startActivity(intent);
-
-
             }
         });
 
 //        notifyWeather("bad weather");
         queryWeather(defaultCity);
+        handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                switch (msg.what) {
+                    case RESPONSE_WEATHER:
+                        List<WeatherItem> weatherItems = (List<WeatherItem>) msg.obj;
+                        weatherItemAdapter = new WeatherItemAdapter(MainActivity.this, R.layout.weather_item, weatherItems);
+                        weatherItemView.setAdapter(weatherItemAdapter);
+                        weatherItemAdapter.notifyDataSetChanged();
+                        break;
+                }
+            }
+        };
     }
 
     public void notifyWeather(String weatherType){
@@ -118,23 +126,27 @@ public class MainActivity extends AppCompatActivity {
                         ResponseEntity responseEntityJson = gson.fromJson(responseEntityStr, ResponseEntity.class);
                         List responseList = responseEntityJson.getList();
                         List<WeatherItem> weatherList = new ArrayList(15);
-                        WeatherItem tempItem = nul;
+                        WeatherItem tempItem = null;
                         LinkedTreeMap<String, Object> innerItem = null;
                         for(int i = 0; i < 15; i++){
                             innerItem = (LinkedTreeMap<String, Object>)responseList.get(i);
                             tempItem = new WeatherItem(
                                     (String)innerItem.get("dt_txt"),
                                     ((LinkedTreeMap<String, String>)((ArrayList)innerItem.get("weather")).get(0)).get("main"),
-                                    ((LinkedTreeMap<String, String>)innerItem.get("main")).get("temp_max"),
-                                    ((LinkedTreeMap<String, String>)innerItem.get("main")).get("temp_min"),
+                                    ((LinkedTreeMap<String, Object>)innerItem.get("main")).get("temp_max").toString(),
+                                    ((LinkedTreeMap<String, Object>)innerItem.get("main")).get("temp_min").toString(),
                                     (String)innerItem.get("dt_txt")
                             );
                             weatherList.add(tempItem);
                         }
+                        Message message = new Message();
+                        message.what = RESPONSE_WEATHER;
+                        message.obj = weatherList;
+                        handler.sendMessage(message);
                     }else{
                     }
                 }catch (Exception e){
-
+                    Log.d("ss", e.getMessage());
                 }
             }
         }).start();
