@@ -1,8 +1,14 @@
 package wang.com.weatherforecast;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.Dialog;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
@@ -51,6 +57,27 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+            }
+        });
+
+        Button btn = (Button) findViewById(R.id.btn);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Dialog dialog = new Dialog(SettingsActivity.this);
+                LinearLayout dialogCompnent = (LinearLayout) LayoutInflater.from(SettingsActivity.this).inflate(R.layout.bottom_dialog_localtion, null);
+                dialog.setContentView(dialogCompnent);
+                Window window = dialog.getWindow();
+                window.setGravity(Gravity.BOTTOM);
+                WindowManager.LayoutParams lp = window.getAttributes();
+                lp.x = 0;
+                lp.y = 0;
+                lp.width = (int) getResources().getDisplayMetrics().widthPixels; // 宽度
+                dialogCompnent.measure(0, 10);
+                lp.height = dialogCompnent.getMeasuredHeight();
+                lp.alpha = 9f; // 透明度
+                window.setAttributes(lp);
+                dialog.show();
             }
         });
 
