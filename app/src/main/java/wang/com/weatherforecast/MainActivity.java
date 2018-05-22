@@ -173,7 +173,8 @@ public class MainActivity extends AppCompatActivity {
             intent.setData(Uri.parse("baidumap://map/show?center=40.057406655722,116.29644071728&zoom=11&traffic=on&bounds=37.8608310000,112.5963090000,42.1942670000,118.9491260000"));
             startActivity(intent);
         }else if(itemId == R.id.settingsItem){
-            //TODO
+            intent = new Intent(getBaseContext(), SettingsActivity.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
