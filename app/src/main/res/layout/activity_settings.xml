@@ -9,6 +9,7 @@
     tools:context="wang.com.weatherforecast.SettingsActivity">
 
     <LinearLayout
+        android:id="@+id/locationArea"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -19,12 +20,13 @@
             android:layout_height="wrap_content" />
         <TextView
             style="@style/settings_item_attr"
-            android:id="@+id/selectedCity"
+            android:id="@+id/selectedCityTextView"
             android:text="长沙"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/tempertureArea"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -36,7 +38,7 @@
         <TextView
             style="@style/settings_item_attr"
             android:text="Metric"
-            android:id="@+id/selectedCity"
+            android:id="@+id/selectedTUTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -66,8 +68,8 @@
             android:text="Enabled"
             android:layout_columnSpan="1"
             android:layout_rowSpan="1"
-            android:layout_gravity="fill"
-            android:id="@+id/isEnableNotify"
+            android:layout_gravity="right"
+            android:id="@+id/enableNotifyTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </GridLayout>
