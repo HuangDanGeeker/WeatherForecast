@@ -1,10 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="wang.com.weatherforecast.SettingsActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            style="@style/settings_item_title"
+            android:text="Location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            style="@style/settings_item_attr"
+            android:id="@+id/selectedCity"
+            android:text="长沙"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            style="@style/settings_item_title"
+            android:text="Temperture Units"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            style="@style/settings_item_attr"
+            android:text="Metric"
+            android:id="@+id/selectedCity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <GridLayout
+        android:rowCount="2"
+        android:columnCount="2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            style="@style/settings_item_title"
+            android:layout_columnSpan="1"
+            android:layout_rowSpan="1"
+            android:layout_gravity="fill"
+            android:text="Weather Notifications"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <CheckBox
+            android:id="@+id/enableNotifyRadoBtn"
+            android:layout_rowSpan="2"
+            android:layout_columnSpan="1"
+            android:layout_gravity="fill"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="10dp"
+            />
+        <TextView
+            style="@style/settings_item_attr"
+            android:text="Enabled"
+            android:layout_columnSpan="1"
+            android:layout_rowSpan="1"
+            android:layout_gravity="fill"
+            android:id="@+id/isEnableNotify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </GridLayout>
+</LinearLayout>
