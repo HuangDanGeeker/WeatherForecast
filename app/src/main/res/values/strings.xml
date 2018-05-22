@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">WeatherForecast</string>
-    <string name="title_activity_detail">detail</string>
+    <string name="title_activity_detail">Detail</string>
 </resources>
