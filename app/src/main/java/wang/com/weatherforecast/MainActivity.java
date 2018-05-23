@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity implements WeatherBCReceiver
     private String defaultCity = "长沙";
     private Handler handler;
 
+    private WeatherBCReceiver bcReceiver;
+
     private TextView dateTextView ;
     private TextView weatherTypeTextView ;
     private TextView maxTemperTextView ;
@@ -86,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements WeatherBCReceiver
         });
 
 
-        WeatherBCReceiver bcReceiver = new WeatherBCReceiver(this);
+        bcReceiver = new WeatherBCReceiver(this);
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("com.WeatherForcast.settingChanged");
         registerReceiver(bcReceiver, intentFilter);
@@ -237,5 +239,13 @@ public class MainActivity extends AppCompatActivity implements WeatherBCReceiver
             pressureTextView.setText(weatherItem.getPressure());
             windTextView.setText(weatherItem.getWind());
         }
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(bcReceiver);
+        bcReceiver = null;
     }
 }

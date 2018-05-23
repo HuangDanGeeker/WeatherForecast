@@ -1,10 +1,11 @@
 package wang.com.weatherforecast;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.view.Window;
 import android.widget.TextView;
 
-public class DetailActivity extends AppCompatActivity {
+public class DetailActivity extends Activity {
 
     private TextView dateTextView ;
     private TextView weekTextView ;
@@ -18,10 +19,10 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         setContentView(R.layout.activity_detail);
-        //TODO
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
+        getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,      // 注意顺序
+                R.layout.activity_detail_title);
 
         WeatherItem weatherItem = (WeatherItem) getIntent().getSerializableExtra("WeatherItem");
 
