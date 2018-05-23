@@ -79,17 +79,7 @@ public class MainActivity extends AppCompatActivity implements WeatherBCReceiver
                     startActivity(intent);
                 } else {
                     //获取组件
-                    humidityTextView = (TextView) findViewById(R.id.humidityTextView);
-                    pressureTextView = (TextView) findViewById(R.id.pressureTextView);
-                    windTextView = (TextView) findViewById(R.id.windTextView);
-
-                    dateTextView.setText(weatherItem.getDate());
-                    weatherTypeTextView.setText(weatherItem.getWeatherType());
-                    maxTemperTextView.setText(weatherItem.getMaxTemper());
-                    minTemperTextView.setText(weatherItem.getMinTemper());
-                    humidityTextView.setText(weatherItem.getHumidity());
-                    pressureTextView.setText(weatherItem.getPressure());
-                    windTextView.setText(weatherItem.getWind());
+                    setupDisplayArea(weatherItem);
                 }
 
             }
@@ -113,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements WeatherBCReceiver
                         weatherItems = (List<WeatherItem>) msg.obj;
                         weatherItemAdapter = new WeatherItemAdapter(MainActivity.this, R.layout.weather_item, weatherItems);
                         weatherItemView.setAdapter(weatherItemAdapter);
+                        setupDisplayArea(weatherItems.get(0));
                         weatherItemAdapter.notifyDataSetChanged();
                         break;
                 }
@@ -232,6 +223,7 @@ public class MainActivity extends AppCompatActivity implements WeatherBCReceiver
         weatherTypeTextView.setText(weatherItem.getWeatherType());
         maxTemperTextView.setText(weatherItem.getMaxTemper());
         minTemperTextView.setText(weatherItem.getMinTemper());
+        //TODO 未设置img
         if (MainActivity.this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
 
         } else {
