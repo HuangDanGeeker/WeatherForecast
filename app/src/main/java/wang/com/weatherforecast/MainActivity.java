@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
     private static final int NOTIFY_WEATHER = 201;
     private static final int RESPONSE_WEATHER = 101;
     private String defaultCity = "长沙";
-
     private Handler handler;
 
 

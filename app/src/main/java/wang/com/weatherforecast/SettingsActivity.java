@@ -1,6 +1,7 @@
 package wang.com.weatherforecast;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
@@ -21,7 +22,7 @@ public class SettingsActivity extends AppCompatActivity {
     private TextView selectedTUTextView;
     private TextView enableNotifyTextView;
     private CheckBox enableNotifyChkBox;
-
+    private Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +78,9 @@ public class SettingsActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 //                    Toast.makeText(getBaseContext(), "ssss", Toast.LENGTH_SHORT).show();
+                    intent = new Intent();
+                    intent.setAction("com.WeatherForcast.settingChanged");
+                    SettingsActivity.this.sendBroadcast(intent);
                     dialog.dismiss();
                 }
             });

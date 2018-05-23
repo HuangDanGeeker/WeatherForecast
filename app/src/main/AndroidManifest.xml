@@ -53,6 +53,15 @@
             android:theme="@style/AppTheme"
             android:label="Settings"
             ></activity>
+
+        <receiver android:name=".WeatherBCReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.WeatherForcast.settingChanged" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>
