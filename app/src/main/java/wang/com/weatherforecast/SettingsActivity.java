@@ -66,11 +66,22 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     public void displayDialog(Integer resouce){
-        Dialog dialog = new Dialog(SettingsActivity.this);
+        final Dialog dialog = new Dialog(SettingsActivity.this);
         LinearLayout dialogCompnent = (LinearLayout) LayoutInflater.from(SettingsActivity.this).inflate(resouce, null);
         dialog.setContentView(dialogCompnent);
         Window window = dialog.getWindow();
         window.setGravity(Gravity.BOTTOM);
+        //添加事件监听
+        for(int i = 0; i < dialogCompnent.getChildCount(); i++){
+            dialogCompnent.getChildAt(i).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+//                    Toast.makeText(getBaseContext(), "ssss", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }
+            });
+        }
+
         WindowManager.LayoutParams lp = window.getAttributes();
         lp.x = 0;
         lp.y = 0;
