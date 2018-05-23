@@ -33,6 +33,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private ArrayAdapter<WeatherItem> weatherItemAdapter;
+    List<WeatherItem> weatherItems;
     ListView weatherItemView;
     private Intent intent;
     private static final int NOTIFY_WEATHER = 201;
@@ -73,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 super.handleMessage(msg);
                 switch (msg.what) {
                     case RESPONSE_WEATHER:
-                        List<WeatherItem> weatherItems = (List<WeatherItem>) msg.obj;
+                        weatherItems = (List<WeatherItem>) msg.obj;
                         weatherItemAdapter = new WeatherItemAdapter(MainActivity.this, R.layout.weather_item, weatherItems);
                         weatherItemView.setAdapter(weatherItemAdapter);
                         weatherItemAdapter.notifyDataSetChanged();
@@ -164,5 +165,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void setTemperUnits(String value){
+        weatherItemAdapter.addAll(weatherItems);
+        weatherItems.stream().forEach(a -> a.updateTemperUnit(value));
+        weatherItemAdapter = new WeatherItemAdapter(MainActivity.this, R.layout.weather_item, weatherItems);
+        weatherItemView.setAdapter(weatherItemAdapter);
+        weatherItemAdapter.notifyDataSetChanged();
     }
 }

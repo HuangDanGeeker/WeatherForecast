@@ -3,7 +3,7 @@ package wang.com.weatherforecast;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
+import android.os.Handler;
 import android.widget.Toast;
 
 /**
@@ -12,9 +12,20 @@ import android.widget.Toast;
 
 public class WeatherBCReceiver extends BroadcastReceiver {
 
+    private Handler handler = new Handler();
     @Override
     public void onReceive(Context context, Intent intent) {
         Toast.makeText(context, "receive", Toast.LENGTH_LONG).show();
-        Log.w("receiver", "received");
+        String type = intent.getStringExtra("type");
+        String value = intent.getStringExtra("value");
+        if("location_changed".equals(type)){
+            //TODO
+//            MainActivity.this.queryWeather(value);
+            handler.sendMessage()
+        }else if("temper_unit_changed".equals(type)){
+//            MainActivity.this.
+        }else{
+            Toast.makeText(context, "receive : unkwon type", Toast.LENGTH_LONG).show();
+        }
     }
 }

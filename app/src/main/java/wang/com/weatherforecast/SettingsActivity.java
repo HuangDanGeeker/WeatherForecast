@@ -23,6 +23,7 @@ public class SettingsActivity extends AppCompatActivity {
     private TextView enableNotifyTextView;
     private CheckBox enableNotifyChkBox;
     private Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,21 +53,21 @@ public class SettingsActivity extends AppCompatActivity {
         locationArea.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                displayDialog(R.layout.bottom_dialog_localtion);
+                displayDialog(R.layout.bottom_dialog_localtion, "location_changed");
             }
         });
 
         tempertureArea.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                displayDialog(R.layout.bottom_dialog_temper_unit);
+                displayDialog(R.layout.bottom_dialog_temper_unit, "temper_unit_changed");
             }
         });
 
 
     }
 
-    public void displayDialog(Integer resouce){
+    public void displayDialog(final Integer resouce, final String dialogType){
         final Dialog dialog = new Dialog(SettingsActivity.this);
         LinearLayout dialogCompnent = (LinearLayout) LayoutInflater.from(SettingsActivity.this).inflate(resouce, null);
         dialog.setContentView(dialogCompnent);
@@ -80,6 +81,8 @@ public class SettingsActivity extends AppCompatActivity {
 //                    Toast.makeText(getBaseContext(), "ssss", Toast.LENGTH_SHORT).show();
                     intent = new Intent();
                     intent.setAction("com.WeatherForcast.settingChanged");
+                    intent.putExtra("type", dialogType);
+                    intent.putExtra("value", ((TextView)v).getText().toString());
                     SettingsActivity.this.sendBroadcast(intent);
                     dialog.dismiss();
                 }
@@ -96,4 +99,6 @@ public class SettingsActivity extends AppCompatActivity {
         window.setAttributes(lp);
         dialog.show();
     }
+
+
 }
