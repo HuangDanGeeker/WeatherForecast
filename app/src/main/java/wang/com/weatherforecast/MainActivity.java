@@ -4,6 +4,7 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -45,40 +47,59 @@ public class MainActivity extends AppCompatActivity implements WeatherBCReceiver
     private String defaultCity = "长沙";
     private Handler handler;
 
+    private TextView dateTextView ;
+    private TextView weatherTypeTextView ;
+    private TextView maxTemperTextView ;
+    private TextView minTemperTextView ;
+    private TextView humidityTextView ;
+    private TextView pressureTextView ;
+    private TextView windTextView ;
 
         @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        //获取组件
         weatherItemView = (ListView) findViewById(R.id.weather_item_view);
-
+        dateTextView = (TextView) findViewById(R.id.dateTextView);
+        weatherTypeTextView = (TextView) findViewById(R.id.weatherTypeTextView);
+        maxTemperTextView = (TextView) findViewById(R.id.maxTemperTextView);
+        minTemperTextView = (TextView) findViewById(R.id.minTemperTextView);
 
         //为ListView设置ItemClick监听器
         weatherItemView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                WeatherItem item = (WeatherItem) MainActivity.this.weatherItemAdapter.getItem(position);
+                WeatherItem weatherItem = (WeatherItem) MainActivity.this.weatherItemAdapter.getItem(position);
 //                Toast.makeText(getBaseContext(), item.getDate(), Toast.LENGTH_LONG).show();
-                intent = new Intent(getBaseContext(), DetailActivity.class);
-                intent.putExtra("WeatherItem", item);
-                startActivity(intent);
+                if (MainActivity.this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+                    intent = new Intent(getBaseContext(), DetailActivity.class);
+                    intent.putExtra("WeatherItem", weatherItem);
+                    startActivity(intent);
+                } else {
+                    //获取组件
+                    humidityTextView = (TextView) findViewById(R.id.humidityTextView);
+                    pressureTextView = (TextView) findViewById(R.id.pressureTextView);
+                    windTextView = (TextView) findViewById(R.id.windTextView);
+
+                    dateTextView.setText(weatherItem.getDate());
+                    weatherTypeTextView.setText(weatherItem.getWeatherType());
+                    maxTemperTextView.setText(weatherItem.getMaxTemper());
+                    minTemperTextView.setText(weatherItem.getMinTemper());
+                    humidityTextView.setText(weatherItem.getHumidity());
+                    pressureTextView.setText(weatherItem.getPressure());
+                    windTextView.setText(weatherItem.getWind());
+                }
+
             }
         });
 
-//        <receiver android:name=".WeatherBCReceiver"
-//            android:enabled="true"
-//            android:exported="true">
-//            <intent-filter>
-//                <action android:name="com.WeatherForcast.settingChanged" />
-//            </intent-filter>
-//        </receiver>
 
-            WeatherBCReceiver bcReceiver = new WeatherBCReceiver(this);
-            IntentFilter intentFilter = new IntentFilter();
-            intentFilter.addAction("com.WeatherForcast.settingChanged");
-            registerReceiver(bcReceiver, intentFilter);
+        WeatherBCReceiver bcReceiver = new WeatherBCReceiver(this);
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("com.WeatherForcast.settingChanged");
+        registerReceiver(bcReceiver, intentFilter);
 
 //        notifyWeather("bad weather");
         //查询当前城市的天气
@@ -94,12 +115,6 @@ public class MainActivity extends AppCompatActivity implements WeatherBCReceiver
                         weatherItemView.setAdapter(weatherItemAdapter);
                         weatherItemAdapter.notifyDataSetChanged();
                         break;
-//                    case SETTING_CHANGED_LOCATION:
-//                        Toast.makeText(MainActivity.this, "SETTING_CHANGED_LOCATION", Toast.LENGTH_SHORT).show();
-//                        break;
-//                    case SETTING_CHANGED_TEMPER_UNIT:
-//                        Toast.makeText(MainActivity.this, "SETTING_CHANGED_TEMPER_UNIT", Toast.LENGTH_SHORT).show();
-//                        break;
                 }
             }
         };
@@ -208,6 +223,27 @@ public class MainActivity extends AppCompatActivity implements WeatherBCReceiver
             default:
                 Toast.makeText(MainActivity.this, "unknow message", Toast.LENGTH_SHORT).show();
                 break;
+        }
+    }
+
+    public void setupDisplayArea(WeatherItem weatherItem){
+        //与方向无关的组件-设置属性
+        dateTextView.setText(weatherItem.getDate());
+        weatherTypeTextView.setText(weatherItem.getWeatherType());
+        maxTemperTextView.setText(weatherItem.getMaxTemper());
+        minTemperTextView.setText(weatherItem.getMinTemper());
+        if (MainActivity.this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+
+        } else {
+            //获取组件
+            humidityTextView = (TextView) findViewById(R.id.humidityTextView);
+            pressureTextView = (TextView) findViewById(R.id.pressureTextView);
+            windTextView = (TextView) findViewById(R.id.windTextView);
+
+            //设置参数
+            humidityTextView.setText(weatherItem.getHumidity());
+            pressureTextView.setText(weatherItem.getPressure());
+            windTextView.setText(weatherItem.getWind());
         }
     }
 }
