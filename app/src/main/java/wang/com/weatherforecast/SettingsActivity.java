@@ -40,8 +40,11 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    //TODO
+                    enableNotifyTextView.setText("Enabled");
+                }else{
+                    enableNotifyTextView.setText("Disabled");
                 }
+                //TODO send broadcast
             }
         });
 
