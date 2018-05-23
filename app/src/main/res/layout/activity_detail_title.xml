@@ -4,18 +4,30 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:background="@color/colorPrimaryDark"
-    android:layout_height="wrap_content"
+    android:layout_height="60dp"
     >
-<TextView
-    android:text="dadwada"
-    android:textSize="20dp"
-    android:textColor="#ffd6d7d7"
-    android:textStyle="bold"
-    android:background="@color/colorPrimaryDark"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" />
-    <ImageButton
-        android:src="@drawable/icon_geo"
+    <TextView
+        android:text="WeatherForecast"
+        android:textSize="20dp"
+        android:textColor="#ffd6d7d7"
+        android:textStyle="bold"
+        android:background="@color/colorPrimaryDark"
         android:layout_width="wrap_content"
-        android:layout_height="20dp" />
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@color/colorPrimaryDark"
+        android:src="@drawable/icon_share" />
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@color/colorPrimaryDark"
+        android:src="@drawable/icon_msg" />
+    <ImageView
+        android:src="@drawable/icon_more"
+        android:background="@color/colorPrimaryDark"
+        android:layout_width="40dp"
+        android:layout_height="40dp" />
 </LinearLayout>
