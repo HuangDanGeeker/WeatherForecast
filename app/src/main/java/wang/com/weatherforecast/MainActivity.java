@@ -67,14 +67,6 @@ public class MainActivity extends AppCompatActivity implements WeatherBCReceiver
             }
         });
 
-//        <receiver android:name=".WeatherBCReceiver"
-//            android:enabled="true"
-//            android:exported="true">
-//            <intent-filter>
-//                <action android:name="com.WeatherForcast.settingChanged" />
-//            </intent-filter>
-//        </receiver>
-
             WeatherBCReceiver bcReceiver = new WeatherBCReceiver(this);
             IntentFilter intentFilter = new IntentFilter();
             intentFilter.addAction("com.WeatherForcast.settingChanged");

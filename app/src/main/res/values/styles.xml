@@ -16,12 +16,14 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
     <style name="settings_item_title">
         <item name="android:textSize">20dp</item>
         <item name="android:layout_marginLeft">25dp</item>
         <item name="android:layout_marginTop">15dp</item>
         <item name="android:textStyle">bold</item>
     </style>
+
     <style name="settings_item_attr">
         <item name="android:textSize">15dp</item>
         <item name="android:layout_marginLeft">25dp</item>
