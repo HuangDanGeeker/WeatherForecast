@@ -3,6 +3,7 @@ package wang.com.weatherforecast;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
@@ -31,13 +33,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements WeatherBCReceiver.SettingMessageHandler{
     private ArrayAdapter<WeatherItem> weatherItemAdapter;
     List<WeatherItem> weatherItems;
     ListView weatherItemView;
     private Intent intent;
     private static final int NOTIFY_WEATHER = 201;
     private static final int RESPONSE_WEATHER = 101;
+    private static final int SETTING_CHANGED_LOCATION = 301;
+    private static final int SETTING_CHANGED_TEMPER_UNIT = 302;
     private String defaultCity = "长沙";
     private Handler handler;
 
@@ -63,7 +67,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+//        <receiver android:name=".WeatherBCReceiver"
+//            android:enabled="true"
+//            android:exported="true">
+//            <intent-filter>
+//                <action android:name="com.WeatherForcast.settingChanged" />
+//            </intent-filter>
+//        </receiver>
 
+            WeatherBCReceiver bcReceiver = new WeatherBCReceiver(this);
+            IntentFilter intentFilter = new IntentFilter();
+            intentFilter.addAction("com.WeatherForcast.settingChanged");
+            registerReceiver(bcReceiver, intentFilter);
 
 //        notifyWeather("bad weather");
         //查询当前城市的天气
@@ -79,6 +94,12 @@ public class MainActivity extends AppCompatActivity {
                         weatherItemView.setAdapter(weatherItemAdapter);
                         weatherItemAdapter.notifyDataSetChanged();
                         break;
+//                    case SETTING_CHANGED_LOCATION:
+//                        Toast.makeText(MainActivity.this, "SETTING_CHANGED_LOCATION", Toast.LENGTH_SHORT).show();
+//                        break;
+//                    case SETTING_CHANGED_TEMPER_UNIT:
+//                        Toast.makeText(MainActivity.this, "SETTING_CHANGED_TEMPER_UNIT", Toast.LENGTH_SHORT).show();
+//                        break;
                 }
             }
         };
@@ -173,5 +194,20 @@ public class MainActivity extends AppCompatActivity {
         weatherItemAdapter = new WeatherItemAdapter(MainActivity.this, R.layout.weather_item, weatherItems);
         weatherItemView.setAdapter(weatherItemAdapter);
         weatherItemAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void handleMessage(int type, String value) {
+        switch (type){
+            case SETTING_CHANGED_LOCATION:
+                Toast.makeText(MainActivity.this, "SETTING_CHANGED_LOCATION", Toast.LENGTH_SHORT).show();
+                break;
+            case SETTING_CHANGED_TEMPER_UNIT:
+                Toast.makeText(MainActivity.this, "SETTING_CHANGED_TEMPER_UNIT", Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                Toast.makeText(MainActivity.this, "unknow message", Toast.LENGTH_SHORT).show();
+                break;
+        }
     }
 }

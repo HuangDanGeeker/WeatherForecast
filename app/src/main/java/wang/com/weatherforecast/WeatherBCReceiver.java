@@ -3,7 +3,6 @@ package wang.com.weatherforecast;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
 import android.widget.Toast;
 
 /**
@@ -12,20 +11,30 @@ import android.widget.Toast;
 
 public class WeatherBCReceiver extends BroadcastReceiver {
 
-    private Handler handler = new Handler();
+
+    private static final int SETTING_CHANGED_LOCATION = 301;
+    private static final int SETTING_CHANGED_TEMPER_UNIT = 302;
+    private SettingMessageHandler handler;
+
+    public WeatherBCReceiver(SettingMessageHandler handler){
+        this.handler = handler;
+    }
+
     @Override
     public void onReceive(Context context, Intent intent) {
-        Toast.makeText(context, "receive", Toast.LENGTH_LONG).show();
-        String type = intent.getStringExtra("type");
-        String value = intent.getStringExtra("value");
-        if("location_changed".equals(type)){
-            //TODO
-//            MainActivity.this.queryWeather(value);
-            handler.sendMessage()
-        }else if("temper_unit_changed".equals(type)){
-//            MainActivity.this.
+        int type = intent.getIntExtra("type", 0);
+        if(type == SETTING_CHANGED_LOCATION || SETTING_CHANGED_TEMPER_UNIT == type){
+            handler.handleMessage(type, intent.getStringExtra("value"));
         }else{
             Toast.makeText(context, "receive : unkwon type", Toast.LENGTH_LONG).show();
         }
+    }
+
+    public void setMEssageHandler(SettingMessageHandler handler){
+        this.handler = handler;
+    }
+
+    public interface SettingMessageHandler{
+        public void handleMessage(int type, String value);
     }
 }

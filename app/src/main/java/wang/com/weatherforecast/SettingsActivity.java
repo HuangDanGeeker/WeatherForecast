@@ -23,7 +23,8 @@ public class SettingsActivity extends AppCompatActivity {
     private TextView enableNotifyTextView;
     private CheckBox enableNotifyChkBox;
     private Intent intent;
-
+    private static final int SETTING_CHANGED_LOCATION = 301;
+    private static final int SETTING_CHANGED_TEMPER_UNIT = 302;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,21 +54,21 @@ public class SettingsActivity extends AppCompatActivity {
         locationArea.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                displayDialog(R.layout.bottom_dialog_localtion, "location_changed");
+                displayDialog(R.layout.bottom_dialog_localtion, SETTING_CHANGED_LOCATION);
             }
         });
 
         tempertureArea.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                displayDialog(R.layout.bottom_dialog_temper_unit, "temper_unit_changed");
+                displayDialog(R.layout.bottom_dialog_temper_unit, SETTING_CHANGED_TEMPER_UNIT);
             }
         });
 
 
     }
 
-    public void displayDialog(final Integer resouce, final String dialogType){
+    public void displayDialog(final Integer resouce, final int dialogType){
         final Dialog dialog = new Dialog(SettingsActivity.this);
         LinearLayout dialogCompnent = (LinearLayout) LayoutInflater.from(SettingsActivity.this).inflate(resouce, null);
         dialog.setContentView(dialogCompnent);
