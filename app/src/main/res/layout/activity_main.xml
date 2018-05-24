@@ -13,7 +13,7 @@
         android:rowCount="4"
         android:columnCount="2"
         android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_height="180dp">
         <TextView
             android:text="WeatherForecast"
             android:id="@+id/weatherTypeTextView"
@@ -22,7 +22,8 @@
             android:textSize="20dp"
             android:textStyle="bold"
             android:gravity="center_vertical"
-            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             />
@@ -35,6 +36,7 @@
             android:id="@+id/dateTextView"
             android:textSize="18dp"
             android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -75,17 +77,17 @@
             android:layout_height="wrap_content"
             />
 
-        <TextView
-            android:layout_gravity="fill"
-            android:layout_columnSpan="1"
-            android:text="天气类型"
-            android:textSize="17dp"
-            android:layout_marginLeft="20dp"
-            android:gravity="center"
-            android:layout_marginBottom="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
+        <!--<TextView-->
+            <!--android:layout_gravity="fill"-->
+            <!--android:layout_columnSpan="1"-->
+            <!--android:text="天气类型"-->
+            <!--android:textSize="17dp"-->
+            <!--android:layout_marginLeft="20dp"-->
+            <!--android:gravity="center"-->
+            <!--android:layout_marginBottom="20dp"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--/>-->
     </GridLayout>
     <ScrollView
         android:fillViewport="true"
