@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class DetailActivity extends AppCompatActivity {
@@ -18,6 +19,7 @@ public class DetailActivity extends AppCompatActivity {
     private TextView humidityTextView ;
     private TextView pressureTextView ;
     private TextView windTextView ;
+    private ImageView imgSymbolImgView;
 
     private Intent intent;
     private WeatherItem weatherItem;
@@ -38,6 +40,7 @@ public class DetailActivity extends AppCompatActivity {
         humidityTextView = (TextView) findViewById(R.id.humidityTextView);
         pressureTextView = (TextView) findViewById(R.id.pressureTextView);
         windTextView = (TextView) findViewById(R.id.windTextView);
+        imgSymbolImgView = (ImageView) findViewById(R.id.imgSymbol);
 
         weekTextView.setText(weatherItem.getDate());
         weatherTypeTextView.setText(weatherItem.getWeatherType());
@@ -46,6 +49,7 @@ public class DetailActivity extends AppCompatActivity {
         humidityTextView.setText(weatherItem.getHumidity());
         pressureTextView.setText(weatherItem.getPressure());
         windTextView.setText(weatherItem.getWind());
+        imgSymbolImgView.setImageResource(weatherItem.getImgSymbol());
     }
 
 
