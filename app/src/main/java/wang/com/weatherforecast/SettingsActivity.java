@@ -100,7 +100,7 @@ public class SettingsActivity extends AppCompatActivity {
         lp.y = 0;
         lp.width = (int) getResources().getDisplayMetrics().widthPixels; // 宽度
         dialogCompnent.measure(0, View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
-        lp.height = dialogCompnent.getMeasuredHeight();
+        lp.height = 2 * dialogCompnent.getMeasuredHeight();
         lp.alpha = 9f; // 透明度
         window.setAttributes(lp);
         dialog.show();
