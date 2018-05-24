@@ -33,7 +33,7 @@ public class WeatherItem  implements Serializable {
             this.imgSymbol = R.drawable.weather_clouds;
         }else  if(imgSymbol.equalsIgnoreCase("rain")){
             this.imgSymbol = R.drawable.weather_rain;
-        } if(imgSymbol.equalsIgnoreCase("clear")){
+        }else if(imgSymbol.equalsIgnoreCase("clear")){
             this.imgSymbol = R.drawable.weather_clear;
         }else{
             this.imgSymbol = R.drawable.weather_clear;

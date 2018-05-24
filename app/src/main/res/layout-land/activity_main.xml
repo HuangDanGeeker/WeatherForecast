@@ -17,130 +17,139 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:columnCount="2"
-        android:rowCount="6"
-    >
+        android:rowCount="6">
+
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_columnSpan="2"
             android:layout_marginLeft="20dp"
-            android:orientation="vertical"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent">
+            android:orientation="vertical">
+
             <TextView
                 android:id="@+id/weatherTypeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:text="date"
                 android:textSize="25dp"
-                android:textStyle="bold"
-                android:layout_marginTop="15dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/dateTextView"
-                android:text="tomorrow"
-                android:textSize="20dp"
-                android:layout_marginTop="3dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="tomorrow"
+                android:textSize="20dp" />
         </LinearLayout>
+
         <TextView
             android:id="@+id/maxTemperTextView"
-            android:layout_gravity="fill"
-            android:layout_columnSpan="1"
-            android:text="maxTemper"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="40dp"
-            android:textSize="30dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_columnSpan="1"
+            android:layout_gravity="fill"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="8dp"
+            android:text="maxTemper"
+            android:textSize="30dp" />
+
         <ImageView
             android:id="@+id/imgSymbol"
-            android:layout_rowSpan="2"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="20dp"
             android:layout_gravity="fill_horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_geo"
-            />
+            android:layout_rowSpan="2"
+            android:src="@drawable/icon_geo" />
+
         <TextView
             android:id="@+id/minTemperTextView"
-            android:layout_gravity="fill"
-            android:layout_columnSpan="1"
-            android:text="minTemper"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="50dp"
-            android:textSize="25dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_columnSpan="1"
+            android:layout_gravity="fill"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="8dp"
+            android:text="minTemper"
+            android:textSize="25dp" />
 
 
         <LinearLayout
-            android:layout_marginLeft="20dp"
-            android:layout_rowSpan="1"
-            android:layout_columnSpan="2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            >
+            android:layout_columnSpan="2"
+            android:layout_marginLeft="20dp"
+            android:layout_rowSpan="1">
+
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:text="Humidity : "
                 android:textSize="20dp"
-                android:textStyle="bold"
-                android:layout_marginTop="15dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/humidityTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:text="humidity"
                 android:textSize="20dp"
-                android:textStyle="bold"
-                android:layout_marginTop="15dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginLeft="20dp"
-            android:layout_rowSpan="1"
-            android:layout_columnSpan="2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            >
+            android:layout_columnSpan="2"
+            android:layout_marginLeft="20dp"
+            android:layout_rowSpan="1">
+
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:text="Pressure : "
                 android:textSize="20dp"
-                android:textStyle="bold"
-                android:layout_marginTop="15dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/pressureTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:text="pressure"
                 android:textSize="20dp"
-                android:textStyle="bold"
-                android:layout_marginTop="15dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginLeft="20dp"
-            android:layout_rowSpan="1"
-            android:layout_columnSpan="2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            >
+            android:layout_columnSpan="2"
+            android:layout_marginLeft="20dp"
+            android:layout_rowSpan="1">
+
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:text="Wind : "
                 android:textSize="20dp"
-                android:textStyle="bold"
-                android:layout_marginTop="15dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/windTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:text="wind"
                 android:textSize="20dp"
-                android:textStyle="bold"
-                android:layout_marginTop="15dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:textStyle="bold" />
         </LinearLayout>
     </GridLayout>
 </LinearLayout>
