@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements WeatherBCReceiver
     private static final int RESPONSE_WEATHER = 101;
     private static final int SETTING_CHANGED_LOCATION = 301;
     private static final int SETTING_CHANGED_TEMPER_UNIT = 302;
+    private static final int SETTING_CHANGED_NOTIFYCATION = 303;
     private String defaultCity = "长沙";
     private Handler handler;
 
@@ -131,8 +132,8 @@ public class MainActivity extends AppCompatActivity implements WeatherBCReceiver
             public void run() {
                 //创建HttpClient对象
                 HttpClient httpClient = new DefaultHttpClient();
-                //创建请求对象
-                HttpGet httpGet = new HttpGet("http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=870ea3f91bdb99ca599ca042eca9eb52&q=Guangzhou,1809858");
+               //创建请求对象
+                HttpGet httpGet = new HttpGet("http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=870ea3f91bdb99ca599ca042eca9eb52&q=" + new LocationMap().getCityCode(cityName));
                 try{
                     //请求
                     HttpResponse response = httpClient.execute(httpGet);
@@ -209,9 +210,15 @@ public class MainActivity extends AppCompatActivity implements WeatherBCReceiver
     public void handleMessage(int type, String value) {
         switch (type){
             case SETTING_CHANGED_LOCATION:
+                queryWeather(value);
                 Toast.makeText(MainActivity.this, "SETTING_CHANGED_LOCATION", Toast.LENGTH_SHORT).show();
                 break;
             case SETTING_CHANGED_TEMPER_UNIT:
+                setTemperUnits(value);
+                Toast.makeText(MainActivity.this, "SETTING_CHANGED_TEMPER_UNIT", Toast.LENGTH_SHORT).show();
+                break;
+            case SETTING_CHANGED_NOTIFYCATION:
+                setTemperUnits(value);
                 Toast.makeText(MainActivity.this, "SETTING_CHANGED_TEMPER_UNIT", Toast.LENGTH_SHORT).show();
                 break;
             default:

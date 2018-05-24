@@ -37,7 +37,7 @@
             android:layout_height="wrap_content" />
         <TextView
             style="@style/settings_item_attr"
-            android:text="Metric"
+            android:text="Celsius"
             android:id="@+id/selectedTUTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

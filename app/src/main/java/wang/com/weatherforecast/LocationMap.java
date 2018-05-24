@@ -21,6 +21,12 @@ public class LocationMap {
 
         return location.get(cityName);
     }
+    public String getCityCode(String cityName){
+
+        return String.valueOf(location.get(cityName).getCode());
+    }
+
+
 
     private class CityDetail {
         private int id;

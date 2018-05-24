@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:text="摄氏度"
+        android:text="Celsius"
         android:textSize="20dp"
         android:textStyle="bold"
         android:layout_marginTop="5dp"
@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="30dp" />
     <TextView
-        android:text="华氏度"
+        android:text="Fahrenheit"
         android:textSize="20dp"
         android:textStyle="bold"
         android:layout_marginLeft="5dp"
@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="25dp" />
     <TextView
-        android:text="凯尔文温度"
+        android:text="Kelvins"
         android:textSize="20dp"
         android:textStyle="bold"
         android:layout_marginLeft="5dp"
