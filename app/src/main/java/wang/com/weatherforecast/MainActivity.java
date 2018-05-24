@@ -199,8 +199,14 @@ public class MainActivity extends AppCompatActivity implements WeatherBCReceiver
     }
 
     public void setTemperUnits(String value){
-        weatherItemAdapter.addAll(weatherItems);
-        weatherItems.stream().forEach(a -> a.updateTemperUnit(value));
+        //java 1.8 failed
+//        weatherItems.stream().forEach(a -> a.updateTemperUnit(value));
+        WeatherItem item = null;
+        for(int i = 0; i < weatherItems.size(); i++){
+            item = ((WeatherItem)weatherItems.get(i)).updateTemperUnit(value);
+            weatherItems.remove(i);
+            weatherItems.add(i, item);
+        }
         weatherItemAdapter = new WeatherItemAdapter(MainActivity.this, R.layout.weather_item, weatherItems);
         weatherItemView.setAdapter(weatherItemAdapter);
         weatherItemAdapter.notifyDataSetChanged();
