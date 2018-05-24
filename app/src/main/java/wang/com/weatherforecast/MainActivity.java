@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements WeatherBCReceiver
                                     ((LinkedTreeMap<String, String>)((ArrayList)innerItem.get("weather")).get(0)).get("main"),
                                     new Double(((LinkedTreeMap<String, Double>)innerItem.get("main")).get("temp_max") - 273.15 ).toString().substring(0,4),
                                     new Double(((LinkedTreeMap<String, Double>)innerItem.get("main")).get("temp_min") - 273.15 ).toString().substring(0,4),
-                                    (String)innerItem.get("dt_txt"),
+                                    ((LinkedTreeMap<String, String>)((ArrayList)innerItem.get("weather")).get(0)).get("main"),
                                     ((LinkedTreeMap<String, Double>)innerItem.get("main")).get("humidity").toString(),
                                     ((LinkedTreeMap<String, Double>)innerItem.get("main")).get("pressure").toString(),
                                     ((LinkedTreeMap<String, Double>)innerItem.get("wind")).get("speed").toString()
@@ -175,7 +175,7 @@ public class MainActivity extends AppCompatActivity implements WeatherBCReceiver
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.more_operation, menu);
+        getMenuInflater().inflate(R.menu.main_activiity_more_operation, menu);
         return true;
     }
 

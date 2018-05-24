@@ -68,7 +68,7 @@ public class WeatherItem  implements Serializable {
 
     @Override
     public String toString() {
-        return this.date + weatherType + maxTemper + minTemper + imgSymbol;
+        return "date : " + date + "\nweather : "+weatherType + "\nTemper unit : " + temperUnit + "\nmaxTemper : " + maxTemper + "\nminTemper : " + minTemper ;
     }
 
     public String getDate() {
