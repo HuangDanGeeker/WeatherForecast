@@ -15,7 +15,7 @@ public class WeatherItem  implements Serializable {
     String Humidity;
     String wind;
     String pressure;
-    String imgSymbol;
+    Integer imgSymbol;
     String temperUnit;
 
     public  WeatherItem(String data, String weatherType, String maxTemper, String minTemper, String imgSymbol, String Humidity,  String pressure, String wind){
@@ -23,11 +23,21 @@ public class WeatherItem  implements Serializable {
         this.weatherType = weatherType;
         this.maxTemper = maxTemper;
         this.minTemper = minTemper;
-        this.imgSymbol = imgSymbol;
+//        this.imgSymbol = imgSymbol;
         this.Humidity = Humidity;
         this.wind = wind;
         this.pressure = pressure;
         this.temperUnit = "Celsius";
+
+        if(imgSymbol.equalsIgnoreCase("clouds")){
+            this.imgSymbol = R.drawable.weather_clouds;
+        }else  if(imgSymbol.equalsIgnoreCase("rain")){
+            this.imgSymbol = R.drawable.weather_rain;
+        } if(imgSymbol.equalsIgnoreCase("clear")){
+            this.imgSymbol = R.drawable.weather_clear;
+        }else{
+            this.imgSymbol = R.drawable.weather_clear;
+        }
     }
 
     public void updateTemperUnit(String value){
@@ -103,7 +113,7 @@ public class WeatherItem  implements Serializable {
         this.minTemper = minTemper;
     }
 
-    public String getImgSymbol() {
+    public Integer getImgSymbol() {
         return imgSymbol;
     }
 

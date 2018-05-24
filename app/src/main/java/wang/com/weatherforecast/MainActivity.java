@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements WeatherBCReceiver
     private TextView humidityTextView ;
     private TextView pressureTextView ;
     private TextView windTextView ;
+    private ImageView imgSymbolImgView;
 
         @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements WeatherBCReceiver
         weatherTypeTextView = (TextView) findViewById(R.id.weatherTypeTextView);
         maxTemperTextView = (TextView) findViewById(R.id.maxTemperTextView);
         minTemperTextView = (TextView) findViewById(R.id.minTemperTextView);
+        imgSymbolImgView = (ImageView) findViewById(R.id.imgSymbol);
 
         //为ListView设置ItemClick监听器
         weatherItemView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -223,10 +226,12 @@ public class MainActivity extends AppCompatActivity implements WeatherBCReceiver
         weatherTypeTextView.setText(weatherItem.getWeatherType());
         maxTemperTextView.setText(weatherItem.getMaxTemper());
         minTemperTextView.setText(weatherItem.getMinTemper());
-        //TODO 未设置img
+        imgSymbolImgView.setImageResource(weatherItem.getImgSymbol());
+        //方向相关组件设置
         if (MainActivity.this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
 
         } else {
+            //横屏
             //获取组件
             humidityTextView = (TextView) findViewById(R.id.humidityTextView);
             pressureTextView = (TextView) findViewById(R.id.pressureTextView);
