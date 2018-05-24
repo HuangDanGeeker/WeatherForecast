@@ -25,6 +25,7 @@ public class SettingsActivity extends AppCompatActivity {
     private Intent intent;
     private static final int SETTING_CHANGED_LOCATION = 301;
     private static final int SETTING_CHANGED_TEMPER_UNIT = 302;
+    private static final int SETTING_CHANGED_NOTIFYCATION = 303;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +48,11 @@ public class SettingsActivity extends AppCompatActivity {
                 }else{
                     enableNotifyTextView.setText("Disabled");
                 }
-                //TODO send broadcast
+                intent = new Intent();
+                intent.setAction("com.WeatherForcast.settingChanged");
+                intent.putExtra("type", SETTING_CHANGED_NOTIFYCATION);
+                intent.putExtra("value", new String().valueOf(isChecked));
+                SettingsActivity.this.sendBroadcast(intent);
             }
         });
 

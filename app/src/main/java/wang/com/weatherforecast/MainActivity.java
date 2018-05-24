@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements WeatherBCReceiver
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         //获取组件
         weatherItemView = (ListView) findViewById(R.id.weather_item_view);
         dateTextView = (TextView) findViewById(R.id.dateTextView);
@@ -95,7 +96,6 @@ public class MainActivity extends AppCompatActivity implements WeatherBCReceiver
         intentFilter.addAction("com.WeatherForcast.settingChanged");
         registerReceiver(bcReceiver, intentFilter);
 
-//        notifyWeather("bad weather");
         //查询当前城市的天气
         queryWeather(defaultCity);
         handler = new Handler() {
@@ -115,13 +115,13 @@ public class MainActivity extends AppCompatActivity implements WeatherBCReceiver
         };
     }
 
-    public void notifyWeather(String weatherType){
+    public void notifyWeather(String weatherType, Integer iconId){
         NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         Notification notification = new NotificationCompat.Builder(this)
                 .setContentTitle("WeatherForecast")
                 .setContentText("today's weather is " + weatherType)
                 .setWhen(System.currentTimeMillis())
-                .setSmallIcon(R.mipmap.ic_launcher_round)
+                .setSmallIcon(iconId)
                 .build();
         manager.notify(NOTIFY_WEATHER, notification);
     }
@@ -224,11 +224,20 @@ public class MainActivity extends AppCompatActivity implements WeatherBCReceiver
                 Toast.makeText(MainActivity.this, "SETTING_CHANGED_TEMPER_UNIT", Toast.LENGTH_SHORT).show();
                 break;
             case SETTING_CHANGED_NOTIFYCATION:
-                setTemperUnits(value);
-                Toast.makeText(MainActivity.this, "SETTING_CHANGED_TEMPER_UNIT", Toast.LENGTH_SHORT).show();
+                boolean isChecked = Boolean.valueOf(value);
+                if(isChecked){
+                    if (weatherItems != null) {
+                        WeatherItem item = weatherItems.get(0);
+                        if (item != null){
+                            notifyWeather(item.getWeatherType(), item.getImgSymbol());
+                        }
+                    }
+                }
+
+                Toast.makeText(MainActivity.this, "SETTING_CHANGED_NOTIFYCATION", Toast.LENGTH_SHORT).show();
                 break;
             default:
-                Toast.makeText(MainActivity.this, "unknow message", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "UNKWON MESSAGE", Toast.LENGTH_SHORT).show();
                 break;
         }
     }

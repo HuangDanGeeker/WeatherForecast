@@ -14,6 +14,7 @@ public class WeatherBCReceiver extends BroadcastReceiver {
 
     private static final int SETTING_CHANGED_LOCATION = 301;
     private static final int SETTING_CHANGED_TEMPER_UNIT = 302;
+    private static final int SETTING_CHANGED_NOTIFYCATION = 303;
     private SettingMessageHandler handler;
 
     public WeatherBCReceiver(SettingMessageHandler handler){
@@ -23,7 +24,7 @@ public class WeatherBCReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         int type = intent.getIntExtra("type", 0);
-        if(type == SETTING_CHANGED_LOCATION || SETTING_CHANGED_TEMPER_UNIT == type){
+     if(SETTING_CHANGED_NOTIFYCATION == type || type == SETTING_CHANGED_LOCATION || SETTING_CHANGED_TEMPER_UNIT == type){
             handler.handleMessage(type, intent.getStringExtra("value"));
         }else{
             Toast.makeText(context, "receive : unkwon type", Toast.LENGTH_LONG).show();
