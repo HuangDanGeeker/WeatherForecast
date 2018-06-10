@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements WeatherBCReceiver
     private TextView pressureTextView ;
     private TextView windTextView ;
     private ImageView imgSymbolImgView;
+    private TextView cityNameTextView;
 
         @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements WeatherBCReceiver
         maxTemperTextView = (TextView) findViewById(R.id.maxTemperTextView);
         minTemperTextView = (TextView) findViewById(R.id.minTemperTextView);
         imgSymbolImgView = (ImageView) findViewById(R.id.imgSymbol);
+        cityNameTextView= (TextView) findViewById(R.id.cityNameTextView);
 
         //为ListView设置ItemClick监听器
         weatherItemView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -216,6 +218,7 @@ public class MainActivity extends AppCompatActivity implements WeatherBCReceiver
     public void handleMessage(int type, String value) {
         switch (type){
             case SETTING_CHANGED_LOCATION:
+                defaultCity = value;
                 queryWeather(value);
                 Toast.makeText(MainActivity.this, "SETTING_CHANGED_LOCATION", Toast.LENGTH_SHORT).show();
                 break;
@@ -251,7 +254,7 @@ public class MainActivity extends AppCompatActivity implements WeatherBCReceiver
         imgSymbolImgView.setImageResource(weatherItem.getImgSymbol());
         //方向相关组件设置
         if (MainActivity.this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-
+            cityNameTextView.setText(defaultCity);
         } else {
             //横屏
             //获取组件
